@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    position: sticky;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 2;
+}
+
+th {
+    box-shadow: 1px 1px 0 #000;
+}
+
+details {
+    display: inline-block;
+}
