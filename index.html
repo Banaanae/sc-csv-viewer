@@ -6,7 +6,16 @@
     </head>
     <body>
         <div id="head">
-
+            <span>
+                <label><input id="showStrings" type="checkbox" checked>Show string columns</label>
+                <label><input id="showNumbers" type="checkbox" checked>Show number columns</label>
+                <label><input id="showBools" type="checkbox" checked>Show boolean columns</label>
+            </span>
+            <span>
+                <button id="collapse">Collapse all arrays</button>
+                <button id="expand">Expand all arrays</button>
+                <button id="uncheck">Uncheck all bool columns</button>
+            </span>
         </div>
         <div id="table">
 
@@ -14,6 +23,7 @@
         <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
         <script src="csv.js"></script>
         <script src="table.js"></script>
+        <script src="header.js"></script>
         <script src="index.js"></script>
     </body>
 </html>

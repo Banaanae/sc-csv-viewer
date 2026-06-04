@@ -1,3 +1,21 @@
+/* HEADER */
+
+#head {
+    display: flex;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: white;
+}
+
+#head span {
+    margin-right: 2%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TABLE */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -15,6 +33,14 @@ thead {
     top: 0;
     background: white;
     z-index: 2;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: white;
+    box-shadow: 1px 1px 0 #000;
 }
 
 th {
