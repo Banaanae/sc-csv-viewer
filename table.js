@@ -1,8 +1,8 @@
-function loadCsvAndFillTable(path) {
+/*function loadCsvAndFillTable(path) {
     fetch(path)
         .then(response => response.text())
         .then(contents => createAndFillTable(contents))
-}
+}*/
 
 function createAndFillTable(contents) {
     let parsedTable = Papa.parse(contents, { header: false });
@@ -24,10 +24,12 @@ function createAndFillTable(contents) {
         let row = document.createElement("tr")
         
         for (let o = 0; o < colCount; o++) {
-            let cell = document.createElement(i >= 2 ? "td" : "th")
+            let cell = document.createElement(o === 0 || i < 2 ? "span" : "td")
             cell.innerText = parsedTable.data[i][o]
+            if (cell.tagName === "SPAN")
+                cell.classList.add("bg")
 
-            if (i === 1 && parsedTable.data[i][o].toLowerCase() === "boolean" && o !== 0) {
+            if (i === 1 && getTypeOf(parsedTable.data[i][o]) === 3 && o !== 0) {
                 let checkbox = document.createElement("input")
                 checkbox.type = "checkbox"
                 checkbox.className = "bool-filter"
@@ -37,13 +39,17 @@ function createAndFillTable(contents) {
 
                 types.push(3)
             } else if (i === 1 && o !== 0) {
-                types.push(parsedTable.data[i][o].toLowerCase() === "int" ? 1 : 2)
+                types.push(getTypeOf(parsedTable.data[i][o].toLowerCase()))
                 thead.querySelector(`th:nth-child(${o + 1})`).classList.add(parsedTable.data[i][o].toLowerCase())
             }
             if (i >= 1 && o !== 0) {
-                cell.classList.add(types[o] === 1 ? "int" :
-                    types[o] === 2 ? "string" : "boolean"
-                )
+                cell.classList.add(getClassFromId(types[o]))
+            }
+            
+            if (cell.tagName === "SPAN") {
+                let _cell = document.createElement(i >= 2 ? "td" : "th")
+                _cell.appendChild(cell)
+                cell = _cell
             }
 
             row.appendChild(cell)
@@ -63,7 +69,11 @@ function createAndFillTable(contents) {
                 
                 let arrayHead = tbody.lastChild
                 if (arrayHead && arrayHead.childNodes[0]) {
-                    arrayHead.childNodes[0].prepend(details)
+                    let cell = arrayHead.childNodes[0]
+                    if (cell.childNodes[0])
+                        cell.childNodes[0].prepend(details)
+                    else
+                        cell.prepend(details)
                 }
             }
             row.classList.add("array" + arrayCount)
@@ -125,4 +135,33 @@ function createAndFillTable(contents) {
             updateRowVisibility()
         })
     })
+}
+
+function getTypeOf(string) {
+    string = string.toLowerCase().replaceAll(/(alt)|(array)/g, "")
+    switch(string) {
+        case "int":
+        case "number": {
+            return 1
+        }
+        case "string":
+        case "hex": {
+            return 2
+        }
+        case "boolean": {
+            return 3
+        }
+        default: {
+            console.error("Unknown type:", string)
+            return 0
+        }
+    }
+}
+
+function getClassFromId(id) {
+    switch (id) {
+        case 1: return "int"
+        case 2: return "string"
+        case 3: return "boolean"
+    }
 }

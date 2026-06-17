@@ -1,1 +1,0 @@
-loadCsvAndFillTable("array.csv")
