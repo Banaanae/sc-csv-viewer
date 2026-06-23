@@ -22,31 +22,40 @@ table {
 }
 
 th, td {
-    border: 1px solid #000;
-    text-align: left;
-    padding: 0;
+  border: 1px solid #000;
+  text-align: left;
+  padding: 0;
 }
 
 th {
-    box-shadow: 0 -1px 0 0 #000,
-        0 1px 0 0 #000;
+  box-shadow: 0 -1px 0 0 #000,
+              0 1px 0 0 #000;
 }
 
 td:not(:nth-child(1)) {
-    padding: 0 8px 0 8px;
+  padding: 0 8px 0 8px;
 }
 
 thead {
-    position: sticky;
-    top: 0;
-    z-index: 2;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 th:nth-child(1), td:nth-child(1) {
-    position: sticky;
-    left: 0;
-    z-index: 1;
-    box-shadow: 1px 0px 0px 0px #000;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: white;
+  box-shadow: 1px 0 0 0 #000;
+}
+
+th:nth-child(2), td:nth-child(2) {
+  position: sticky;
+  left: 34px;
+  z-index: 2;
+  background: white;
+  box-shadow: 1px 0 0 0 #000;
 }
 
 input[type="checkbox"] {

@@ -22,6 +22,7 @@ function createAndFillTable(contents) {
 
     for (let i = 0; i < rowCount; i++) {
         let row = document.createElement("tr")
+        parsedTable.data[i].unshift(i > 1 ? i - 2 : "")
         
         for (let o = 0; o < colCount; o++) {
             let cell = document.createElement(o === 0 || i < 2 ? "span" : "td")
